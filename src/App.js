@@ -3,20 +3,36 @@ import inventory, { categories } from './inventory'
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      category: ''
+    }
+  }
 
   render() {
 
-    const cats = categories.map((item, index) => {
+    const cats = categories.map((item, i) => {
       return (
-        <button>
+        <button key={`category-${i}`}
+          onClick={(e) => {
+            this.setState({ category: item })
+          }}
+
+        >
           {item}
         </button>
       )
     })
 
-    const products = inventory.map(({ name, id, category, description, price }, index) => {
+    const products = inventory.filter(
+      (item) => {
+        return item.category === this.state.category
+      }
+    ).map(({ name, id, category, description, price }, i) => {
       return (
-        <div>
+        <div key={`product- ${id}`}>
           <h1>{name}</h1>
           <p>{description}</p>
           <p>{price}</p>
@@ -27,6 +43,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Show products here</h1>
+        <p>{this.state.category}</p>
 
         <ul>
           {/* List product categories here */}
