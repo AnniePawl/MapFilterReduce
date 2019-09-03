@@ -1,8 +1,21 @@
+html {
+  height: 100%;
+}
+
+/* 
 .App {
  width: 960px;
  margin: auto;
  display: grid;
  grid-template-columns: 1fr 1fr 1fr;
-}
+} */
 
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-size:40px;
+  font-weight: bolder;
+  text-align: center;
+  color:#283c7a;
+  margin:30px;
+}
 

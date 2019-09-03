@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Title from './Title'
 import inventory, { categories } from './inventory'
 import './App.css';
 
@@ -13,22 +14,28 @@ class App extends Component {
 
   render() {
 
+
+
     const cats = categories.map((item, i) => {
       return (
         <button key={`category-${i}`}
           onClick={(e) => {
             this.setState({ category: item })
-          }}
-
-        >
+          }}>
           {item}
         </button>
       )
     })
 
+    cats.push(<button key={`category-''`}
+      onClick={(e) => {
+        this.setState({ category: '' })
+      }}>
+      {''}All</button>)
+
     const products = inventory.filter(
       (item) => {
-        return item.category === this.state.category
+        return item.category === this.state.category || this.state.category === ''
       }
     ).map(({ name, id, category, description, price }, i) => {
       return (
@@ -41,8 +48,12 @@ class App extends Component {
     })
 
     return (
-      <div className="App">
-        <h1>Show products here</h1>
+      <div className="App" >
+
+        {/* Title Component */}
+        < Title />
+
+
         <p>{this.state.category}</p>
 
         <ul>
